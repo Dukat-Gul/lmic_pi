@@ -626,7 +626,11 @@ static void rxfsk (u1_t rxmode) {
 }
 
 static void startrx (u1_t rxmode) {
-    ASSERT( (readReg(RegOpMode) & OPMODE_MASK) == OPMODE_SLEEP );
+    u1_t opMode = readReg(RegOpMode);
+    if ( ( opMode & OPMODE_MASK ) != OPMODE_SLEEP ) {
+      fprintf(stdout, "ERROR: OpMode expected to be SLEEP, but was 0x%x.\n", opMode);
+    }
+    ASSERT( ( opMode & OPMODE_MASK ) == OPMODE_SLEEP );
     if(getSf(LMIC.rps) == FSK) { // FSK modem
         rxfsk(rxmode);
     } else { // LoRa modem
@@ -787,7 +791,7 @@ void radio_irq_handler (u1_t dio) {
             // indicate timeout
             LMIC.dataLen = 0;
         } else {
-            fprintf(stderr, "OhOh. Unknown interrupt flags for FSK\n");
+            fprintf(stderr, "OhOh. Unknown interrupt flags for FSK [ flags1: 0x%x, flags2: 0x%x ] \n", flags1, flags2);
             while(1);
         }
     }
