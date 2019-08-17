@@ -1,6 +1,6 @@
 #// ##########
 #// TO SET THIS UP AS A DAEMON
-#//  $ sudo cp /source-code/github_stephenbeauchamp/lmic_pi/examples/ttn-app_test01.service /etc/systemd/system/
+#//  $ sudo cp /source-code/github.com_stephenbeauchamp/lmic_pi/examples/ttn-app_test01/ttn-app_test01.service /etc/systemd/system/
 #//  $ sudo systemctl enable ttn-app_test01
 #//  $ sudo Systemctl start ttn-app_test01
 #// ##########
@@ -12,8 +12,8 @@ After=network.target
 
 [Service]
 Type=Simple
-WorkingDirectory=/source-code/github_stephenbeauchamp/lmic_pi/examples/ttn-app_test01/
-ExecStart=/bin/bash -lc '/source-code/github_stephenbeauchamp/lmic_pi/examples/ttn-app_test01/ttn-app_test01 > /source-code/github_stephenbeauchamp/limic_pi/examples/ttn-app_test01/log.txt 2>&1' 
+WorkingDirectory=/source-code/github.com_stephenbeauchamp/lmic_pi/examples/ttn-app_test01/
+ExecStart=/bin/bash -lc '/source-code/github.com_stephenbeauchamp/lmic_pi/examples/ttn-app_test01/ttn-app_test01 > /source-code/github.com_stephenbeauchamp/lmic_pi/examples/ttn-app_test01/log.txt 2>&1' 
 
 [Install]
 WantedBy=multi-user.target
