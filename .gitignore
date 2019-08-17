@@ -3,4 +3,5 @@
 *.ko
 *.obj
 *.elf
-
+*.log
+**/log.txt
