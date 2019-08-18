@@ -48,6 +48,7 @@ void debug_event(ev_t e) {
   if ( e==EV_RXCOMPLETE     ) { fprintf(stdout, "DEBUG: event EV_RXCOMPLETE\n"     ); }
   if ( e==EV_LINK_DEAD      ) { fprintf(stdout, "DEBUG: event EV_LINK_DEAD\n"      ); }
   if ( e==EV_LINK_ALIVE     ) { fprintf(stdout, "DEBUG: event EV_LINK_ALIVE\n"     ); }
+  fflush(stdout);
 }
 
 void debug_txrxFlags(u1_t f) {
@@ -58,6 +59,7 @@ void debug_txrxFlags(u1_t f) {
   if ( ( f & TXRX_DNW1   ) == TXRX_DNW1   ) { fprintf(stdout, "DEBUG: txrxFlags TXRX_DNW1\n"  );  };
   if ( ( f & TXRX_DNW2   ) == TXRX_DNW2   ) { fprintf(stdout, "DEBUG: txrxFlags TXRX_DNW2\n"  );  };
   if ( ( f & TXRX_PING   ) == TXRX_PING   ) { fprintf(stdout, "DEBUG: txrxFlags TXRX_PING\n"  );  };
+  fflush(stdout);
 }
 
 void debug_lmic(lmic_t l) {
@@ -76,6 +78,7 @@ void debug_lmic(lmic_t l) {
   fprintf(stdout, "DEBUG: - bcnRxsyms .... %u\n", l.bcnRxsyms );
   fprintf(stdout, "DEBUG: - bcnRxtime .... ?\n" );
   fprintf(stdout, "DEBUG: - bcnInfo ...... ?\n" ); 
+  fflush(stdout);
 }
 
 // LoRaWAN Application identifier (AppEUI)
@@ -139,9 +142,11 @@ void onEvent (ev_t ev) {
       // use this event to keep track of actual transmissions
       debug_lmic( LMIC );
       fprintf(stdout, "Event EV_TXCOMPLETE, time: %d\n", millis() / 1000);
+      fflush(stdout);
       if(LMIC.dataLen) { // data received in rx slot after tx
         //debug_buf(LMIC.frame+LMIC.dataBeg, LMIC.dataLen);
         fprintf(stdout, "Data Received!\n");
+        fflush(stdout);
       }
       fprintf( stdout, "DEBUG: txrxFlags %u\n", LMIC.txrxFlags );
       debug_txrxFlags( LMIC.txrxFlags );

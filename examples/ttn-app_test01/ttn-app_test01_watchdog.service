@@ -1,0 +1,17 @@
+#// ##########
+#// TO SET THIS DAEMON UP
+#//  $ sudo cp /source-code/github.com_stephenbeauchamp/lmic_pi/examples/ttn-app_test01/ttn-app_test01_watchdog.service /etc/systemd/system/ttn-app_test01_watchdog.service
+#//  $ sudo systemctl enable ttn-app_test01_watchdog
+#//  $ sudo systemctl start ttn-app_test01_watchdog
+#// ##########
+
+[Unit]
+Description=A watchdog to restart the ttn-app_test01 app if it stops logging
+After=network.target
+
+[Service]
+Type=Simple
+ExecStart=/bin/bash -lc '/source-code/github.com_stephenbeauchamp/lmic_pi/examples/ttn-app_test01/watchdog.sh'
+
+[Install]
+WantedBy=multi-user.target
