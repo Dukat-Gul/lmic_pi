@@ -266,6 +266,7 @@ static void writeReg (u1_t addr, u1_t data ) {
     hal_spi(addr | 0x80);
     hal_spi(data);
     hal_pin_nss(1);
+    fprintf( stdout, "DEBUG: VAL[0x%02x] -write-> REG[0x%02x]\n", data, addr );
 }
 
 static u1_t readReg (u1_t addr) {
@@ -273,7 +274,8 @@ static u1_t readReg (u1_t addr) {
     hal_spi(addr & 0x7F);
     u1_t val = hal_spi(0x00);
     hal_pin_nss(1);
-    return val;
+    fprintf( stdout, "DEBUG: VAL[0x%02x] <-read-- REG[0x%02x]\n", val, addr );
+    return val;  
 }
 
 static void writeBuf (u1_t addr, xref2u1_t buf, u1_t len) {
